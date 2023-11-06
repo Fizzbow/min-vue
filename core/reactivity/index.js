@@ -5,10 +5,14 @@ class Dep {
     this._val = val;
   }
   get value() {
+    // 读值的时候收集依赖
+    this.depend();
     return this._val;
   }
   set value(newVal) {
     this._val = newVal;
+    // 当值发生改变的时候触发依赖
+    this.notice();
   }
 
   // 收集依赖
@@ -27,7 +31,6 @@ class Dep {
 function effectWatch(effect) {
   currentEffect = effect;
   effect();
-  dep.depend();
   currentEffect = null;
 }
 
@@ -43,4 +46,3 @@ effectWatch(() => {
 
 // 2. 当dep.value发生改变的时候，通知effectWatch执行（调用notice）
 dep.value = 20;
-dep.notice();
