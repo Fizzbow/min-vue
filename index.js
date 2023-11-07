@@ -9,13 +9,14 @@
 // a = 20;
 // updated();
 
-const { reactive, effect } = require("@vue/reactivity");
+// const { reactive, effectWatch } = require("./core/reactivity");
+import { effectWatch, reactive } from "./core/reactivity/index.js";
 let a = reactive({ value: 10 });
 let b;
 // effect函数实现当变量a发生改变的时候，effect函数会自动触发
-effect(() => {
+effectWatch(() => {
   b = a.value + 10;
-  console.log({ a, b });
+  console.log({ b });
 });
 
 a.value = 30;
