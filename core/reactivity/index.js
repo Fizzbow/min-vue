@@ -28,7 +28,7 @@ class Dep {
     });
   }
 }
-function effectWatch(effect) {
+export function effectWatch(effect) {
   currentEffect = effect;
   effect();
   currentEffect = null;
@@ -37,15 +37,15 @@ function effectWatch(effect) {
 // 实例中传入的值相当于需要响应式的变量
 const dep = new Dep(10);
 
-let b;
-effectWatch(() => {
-  // 1. 当effectWatch中传入参数,effectWatch执行这个传入的函数
-  b = dep.value + 20;
-  console.log({ b });
-});
+// let b;
+// effectWatch(() => {
+//   // 1. 当effectWatch中传入参数,effectWatch执行这个传入的函数
+//   b = dep.value + 20;
+//   console.log({ b });
+// });
 
-// 2. 当dep.value发生改变的时候赋新的值set(newValue)，通知effectWatch执行（调用notice）
-dep.value = 20;
+// // 2. 当dep.value发生改变的时候赋新的值set(newValue)，通知effectWatch执行（调用notice）
+// dep.value = 20;
 
 // 实现reactive
 // key 对应 dep
@@ -67,7 +67,7 @@ function getDep(target, key) {
   return dep;
 }
 
-function reactive(raw) {
+export function reactive(raw) {
   return new Proxy(raw, {
     get(target, key) {
       const dep = getDep(target, key);
@@ -87,9 +87,9 @@ function reactive(raw) {
 }
 const user = reactive({ name: "sd" });
 
-let double;
-effectWatch(() => {
-  double = user.name;
-  console.log("reactive", { double });
-});
-user.name = "cssdsad";
+// let double;
+// effectWatch(() => {
+//   double = user.name;
+//   console.log("reactive", { double });
+// });
+// user.name = "cssdsad";
