@@ -16,7 +16,7 @@ let b;
 // effect函数实现当变量a发生改变的时候，effect函数会自动触发
 effectWatch(() => {
   b = a.value + 10;
-  console.log({ a, b });
+  console.log({ b });
 });
 
 a.value = 30;
