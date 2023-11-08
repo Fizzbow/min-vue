@@ -9,10 +9,10 @@ export default {
     return h(
       "div",
       {
-        id: "nav",
+        id: "nav" + context.state.count,
         class: "flex",
       },
-      [h("p", null, "hahh"), h("p", null, "gag")]
+      [h("p", null, context.state.count), h("p", null, "gag")]
     );
   },
   setup() {
